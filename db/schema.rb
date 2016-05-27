@@ -11,7 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160524143933) do
+ActiveRecord::Schema.define(version: 20160527171958) do
+
+  create_table "attendees", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.integer  "event_id",   limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "attendees", ["event_id"], name: "index_attendees_on_event_id", using: :btree
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.integer  "position",   limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "event_groupships", force: :cascade do |t|
+    t.integer  "event_id",   limit: 4
+    t.integer  "group_id",   limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
 
   create_table "events", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -21,6 +44,22 @@ ActiveRecord::Schema.define(version: 20160524143933) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.string   "status",      limit: 255
+    t.integer  "category_id", limit: 4
+  end
+
+  add_index "events", ["category_id"], name: "index_events_on_category_id", using: :btree
+
+  create_table "groups", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.integer  "event_id",   limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "people", force: :cascade do |t|
@@ -31,4 +70,5 @@ ActiveRecord::Schema.define(version: 20160524143933) do
     t.datetime "updated_at",               null: false
   end
 
+  add_foreign_key "attendees", "events"
 end

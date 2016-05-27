@@ -1,14 +1,15 @@
 # == Schema Information
 #
-# Table name: people
+# Table name: event_groupships
 #
 #  id         :integer          not null, primary key
-#  name       :string(255)
-#  info       :text(65535)
-#  birthday   :date
+#  event_id   :integer
+#  group_id   :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class Person < ActiveRecord::Base
+class EventGroupship < ActiveRecord::Base
+  belongs_to :event
+  belongs_to :group
 end

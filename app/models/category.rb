@@ -1,14 +1,14 @@
 # == Schema Information
 #
-# Table name: people
+# Table name: categories
 #
 #  id         :integer          not null, primary key
 #  name       :string(255)
-#  info       :text(65535)
-#  birthday   :date
+#  position   :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class Person < ActiveRecord::Base
+class Category < ActiveRecord::Base
+  has_many :events
 end
