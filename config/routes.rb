@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   # 外卡路由
-  match ':controller(/:action(/:id(.:format)))', :via => :all
+  # match ':controller(/:action(/:id(.:format)))', :via => :all
+
+  resources :events
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
