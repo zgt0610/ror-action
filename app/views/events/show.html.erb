@@ -1,4 +1,12 @@
-<%= @event.name %>
-<%= simple_format(@event.description) %>
+<p>Event Name:<%= @event.name %></p>
+<p>Event Description:<%= simple_format(@event.description) %></p>
+<p>Category:<%= @event.category.try(:name) %></p>
+<p>Location:<%=@event.location.try(:name) %></p>
+<p>
+  Group:
+  <% @event.groups.each do |g| %>
+    <%= g.name %>
+  <% end %>
+</p>
 
 <p><%= link_to "Back to index", events_path %></p>

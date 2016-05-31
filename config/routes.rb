@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  get 'event_attendees/index'
+
+  get 'event_attendees/show'
+
+  get 'event_attendees/new'
+
+  get 'event_attendees/edit'
+
   resources :people
   get "welcome/say_hello" => "welcome#say"
   get "welcome" => "welcome#index"
@@ -12,7 +20,22 @@ Rails.application.routes.draw do
   # 外卡路由
   # match ':controller(/:action(/:id(.:format)))', :via => :all
 
-  resources :events
+  resources :events do
+    collection do
+      get :latest
+      post :bulk_delete
+      post :bulk_update
+    end
+    member do
+      get :dashboard
+    end
+    resources :attendees, :controller => 'event_attendees'
+    resource  :location,  :controller => 'event_locations'
+  end
+
+  resources :admin do
+    resources :events
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

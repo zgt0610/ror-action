@@ -18,11 +18,13 @@
 #
 
 class Event < ActiveRecord::Base
-  has_one :location, :dependent => :destory
-  has_many :attendees, -> { where(["created_at > ?", Time.now -7.days]).order("id DESC") }, :dependent => :destroy
-  belongs_to :category
+  has_one :location, :dependent => :destroy
+  accepts_nested_attributes_for :location, :allow_destroy => true, :reject_if => :all_blank
+  has_many :attendees, -> {order ("id DESC")},  :dependent => :destroy
+  belongs_to :category, :dependent => :destroy
   has_many :event_groupships
   has_many :groups, :through => :event_groupships
 
+  # default_scope { order "created_at DESC"}
   validates_presence_of :name
 end
