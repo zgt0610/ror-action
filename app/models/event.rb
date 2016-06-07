@@ -18,6 +18,7 @@
 #
 
 class Event < ActiveRecord::Base
+  store :settings, accessors: [:sex, :url]
   has_one :location, :dependent => :destroy
   accepts_nested_attributes_for :location, :allow_destroy => true, :reject_if => :all_blank
   has_many :attendees, -> {order ("id DESC")},  :dependent => :destroy
