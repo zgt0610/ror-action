@@ -7,6 +7,7 @@
 #  description :text(65535)
 #  is_public   :boolean
 #  capacity    :integer
+#  settings    :text(65535)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  status      :string(255)
