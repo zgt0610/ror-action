@@ -1,3 +1,4 @@
+require 'csv'
 class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy]
 
@@ -5,6 +6,20 @@ class PeopleController < ApplicationController
   # GET /people.json
   def index
     @people = Person.all
+    respond_to do |format|
+      format.html
+      format.json { render :json => @person.to_json }
+      format.xml  { render :xml => @person.to_xml }
+      format.csv do
+        csv_string = CSV.generate do |csv|
+          csv << ["Name", "Create At"]
+          @people.each do |people|
+            csv << [person.name, person.created_at]
+          end
+        end
+        render :text => csv_string
+      end
+    end
   end
 
   # GET /people/1

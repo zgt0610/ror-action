@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  layout 'admin/special'
   before_action :set_event, :only => [:show, :edit, :update, :destroy, :dashboard]
 
   def index
