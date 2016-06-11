@@ -5,6 +5,7 @@ class CreateEvents < ActiveRecord::Migration
       t.text :description
       t.boolean :is_public
       t.integer :capacity
+      t.text :settings
 
       t.timestamps null: false
     end

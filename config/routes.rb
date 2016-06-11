@@ -36,6 +36,8 @@ Rails.application.routes.draw do
   resources :admin do
     resources :events
   end
+
+  get "/zgt" => redirect("http://www.baidu.com")
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
